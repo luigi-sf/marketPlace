@@ -1,0 +1,135 @@
+.my-products {
+  padding: 50px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fefefe 0%, #f4f7ff 100%);
+  font-family: 'Segoe UI', sans-serif;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #e60012; // 🔴 Nintendo Red
+      letter-spacing: 1px;
+    }
+
+    button {
+      padding: 14px 28px;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      background: #e60012;
+      color: white;
+      box-shadow: 0 6px 0 #b8000e;
+      transition: 0.15s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(4px);
+        box-shadow: 0 2px 0 #b8000e;
+      }
+    }
+  }
+
+  .empty {
+    text-align: center;
+    margin-top: 80px;
+    font-size: 18px;
+    color: #666;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 10px 0 #dcdcdc;
+    border: 3px solid #f1f1f1;
+    transition: 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &:hover {
+      transform: translateY(-6px);
+    }
+
+    .card-body {
+      h3 {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 12px;
+        color: #111;
+      }
+
+      .price {
+        font-size: 18px;
+        font-weight: 700;
+        color: #00A651;
+        margin-bottom: 8px;
+      }
+
+      .stock {
+        font-size: 14px;
+        background: #fff3cd;
+        color: #856404;
+        padding: 6px 10px;
+        border-radius: 20px;
+        display: inline-block;
+        font-weight: 600;
+      }
+    }
+
+    .card-actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+
+      button {
+        flex: 1;
+        padding: 10px;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.2s ease;
+
+        &.edit {
+          background: #00A651;;
+          color: white;
+          box-shadow: 0 5px 0 #009146;;
+
+          &:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #018b43;;
+          }
+        }
+
+        &.delete {
+          background: #ff3b30;
+          color: white;
+          box-shadow: 0 5px 0 #c6281e;
+
+          &:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #c6281e;
+          }
+        }
+      }
+    }
+  }
+}

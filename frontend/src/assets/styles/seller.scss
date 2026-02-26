@@ -1,0 +1,183 @@
+@use "./variables" as *;
+
+.seller-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #e60012 0%, #b8000f 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.seller-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 650px;
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 15px 0 #8c000c;
+  border: 6px solid #000;
+}
+
+.seller-title {
+  font-size: 32px;
+  text-align: center;
+  color: #e60012;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.seller-subtitle {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.seller-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+  align-items: center;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 400px;
+  }
+
+  label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #000;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 18px;
+    border: 3px solid #000;
+    font-size: 16px;
+    background: #f5f5f5;
+    box-shadow: 6px 6px 0 #000;
+    transition: 0.15s;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  textarea {
+    resize: none;
+    min-height: 120px;
+  }
+
+  button {
+    background: #ffcc00;
+    border: 3px solid #000;
+    padding: 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #000;
+    transition: 0.15s;
+  }
+
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  button:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0 #000;
+  }
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 80%;
+  max-width: 400px;
+  margin-top: 10px;
+
+  button {
+    flex: 1;
+  }
+
+   button.meusProdutos {
+    background: #00A651;
+    color: #fff;
+  }
+
+  button.meusProdutos:hover {
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  button.meusProdutos:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  /* 🔥 BOTÃO PERSONALIZADO */
+  button.cadastrarProduto {
+    background: #e60012;
+    color: #fff;
+  }
+
+  button.cadastrarProduto:hover {
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 0 #000;
+  }
+
+  button.cadastrarProduto:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0 #000;
+  }
+}
+
+.seller-status {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 20px;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  margin-top: 20px;
+}
+
+.seller-status.pending {
+  background: #ffcc00;
+}
+
+.seller-info {
+  background: #ffcc00;
+  padding: 20px;
+  border-radius: 20px;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  margin-bottom: 20px;
+
+  p {
+    margin-bottom: 8px;
+  }
+
+  strong {
+    color: #e60012;
+  }
+}
+
+hr {
+  border: none;
+  height: 4px;
+  background: #000;
+  margin: 30px 0;
+}
