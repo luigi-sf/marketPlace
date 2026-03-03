@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { productService } from "../services/productServie"
+import { productService } from "../services/productService"
 import type { Product } from "../types/products/product"
-import "../assets/styles/dashboard.scss"
+import "../assets/styles/home/home.scss"
 import { API_URL } from "../services/api"
 
-export default function Dashboard() {
+export default function Home() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [currentSlide, setCurrentSlide] = useState(0)

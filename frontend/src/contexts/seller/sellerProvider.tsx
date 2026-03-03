@@ -7,7 +7,8 @@ import type {
   UpdateSellerProfileDTO,
 } from "../../types/seller/seller";
 import { SellerContext } from "./sellerContext";
-import "../../assets/styles/seller.scss";
+import { getSocket } from "../../sockets"; // seu socket global
+import "../../assets/styles/sellers/seller.scss";
 
 export function SellerProvider({ children }: { children: ReactNode }) {
   const [seller, setSeller] = useState<SellerProfileResponse | null>(null);
@@ -16,35 +17,24 @@ export function SellerProvider({ children }: { children: ReactNode }) {
   const isSeller = !!seller;
   const isApproved = seller?.isApproved === true;
 
-  // 🔄 Atualiza dados do seller
- async function refreshSeller() {
-  setLoading(true)
-  try {
-    const sellerData = await sellerService.getMyStore()
-    console.log("SELLER DATA:", sellerData)
-
-    setSeller({
-      ...sellerData,
-      isApproved: !!sellerData.isApproved
-    })
-
-  } catch (err) {
-    console.error(err)
-    setSeller(null)
-  } finally {
-    setLoading(false)
+  async function refreshSeller() {
+    setLoading(true);
+    try {
+      const sellerData = await sellerService.getMyStore();
+      setSeller({ ...sellerData, isApproved: !!sellerData.isApproved });
+    } catch (err) {
+      console.error(err);
+      setSeller(null);
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
-  // 🏪 Criar seller
   async function createSeller(data: CreateSellerProfileDTO) {
     setLoading(true);
     try {
       const newSeller = await sellerService.create(data);
-      setSeller({
-        ...newSeller,
-        isApproved: !!newSeller.isApproved,
-      });
+      setSeller({ ...newSeller, isApproved: !!newSeller.isApproved });
     } catch (err) {
       console.error("Erro ao criar seller:", err);
     } finally {
@@ -52,35 +42,50 @@ export function SellerProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  // ✏️ Atualizar seller
   async function updateSeller(data: UpdateSellerProfileDTO) {
-  if (!seller) return;
-
-  setLoading(true);
-  try {
-    const updated = await sellerService.updateMyStore(data);
-
-    setSeller({
-      ...updated,
-      isApproved: !!updated.isApproved,
-    });
-
-  } catch (err) {
-    console.error("Erro ao atualizar seller:", err);
-  } finally {
-    setLoading(false);
+    if (!seller) return;
+    setLoading(true);
+    try {
+      const updated = await sellerService.updateMyStore(data);
+      setSeller({ ...updated, isApproved: !!updated.isApproved });
+    } catch (err) {
+      console.error("Erro ao atualizar seller:", err);
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
-  // 🚀 Auto refresh a cada 5 segundos
+  // 🔔 Socket listener para atualizar o seller automaticamente
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket) return;
+
+    // Ouve mudanças no seller logado
+    const handleSellerUpdated = (data: Partial<SellerProfileResponse> & { userId: string }) => {
+      if (seller?.userId === data.userId) {
+        setSeller(prev => ({ ...prev!, ...data }));
+      }
+    };
+
+    // Ouve quando o seller é aprovado pelo admin
+    const handleSellerApproved = (data: { userId: string }) => {
+      if (seller?.userId === data.userId) {
+        setSeller(prev => ({ ...prev!, isApproved: true }));
+      }
+    };
+
+    socket.on("seller:updated", handleSellerUpdated);
+    socket.on("seller:approved", handleSellerApproved);
+
+    return () => {
+      socket.off("seller:updated", handleSellerUpdated);
+      socket.off("seller:approved", handleSellerApproved);
+    };
+  }, [seller]);
+
+  // 🔄 fetch inicial
   useEffect(() => {
     refreshSeller();
-
-    const interval = setInterval(() => {
-      refreshSeller();
-    }, 500000);
-
-    return () => clearInterval(interval);
   }, []);
 
   return (

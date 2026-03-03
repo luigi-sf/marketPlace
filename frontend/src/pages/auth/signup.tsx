@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useAuth } from "../../components/hooks/useAuth"
 import { useNavigate, Link } from "react-router-dom"
-import "../../assets/styles/signup.scss"
+import "../../assets/styles/auth/signup.scss"
 
 export default function RegisterPage() {
   const { signup, loading } = useAuth()
@@ -25,7 +25,7 @@ export default function RegisterPage() {
       const success = await signup({ name, email, password })
 
       if (success) {
-        navigate("/dashboard")
+        navigate("/home")
       } else {
         setError("Erro ao criar conta.")
       }

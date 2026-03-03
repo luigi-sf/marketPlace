@@ -8,6 +8,12 @@ export interface ProductDTO{
   categoryId: string;
 }
 
+export type ApiResponse<T> = {
+  status: string;
+  message: string;
+  data: T;
+};
+
 export interface Product {
   id: string;
   title: string;
@@ -26,4 +32,7 @@ export interface Product {
     id: string;
     url: string;
   }[];
+}
+export interface LocationState {
+  selectedCategory: Category;
 }

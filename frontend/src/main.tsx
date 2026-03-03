@@ -4,6 +4,7 @@ import App from "./App"
 import { BrowserRouter } from "react-router-dom"
 import { AuthProvider } from "./contexts/auth/authProvider"
 import { SellerProvider } from "./contexts/seller/sellerProvider"
+import { AppProviders } from "../src/contexts/providers"
 import "./assets/styles/global.scss"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -11,7 +12,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter> 
       <AuthProvider>
         <SellerProvider>
+          <AppProviders >
           <App />
+          </AppProviders>
         </SellerProvider>
       </AuthProvider>
     </BrowserRouter>

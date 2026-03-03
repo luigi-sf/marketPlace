@@ -1,6 +1,8 @@
-import { useState } from "react";
+// src/pages/seller/sellerPage.tsx
+import { useState, useEffect } from "react";
 import { useSeller } from "../../components/hooks/useSeller";
 import { useNavigate } from "react-router-dom";
+import '../../assets/styles/sellers/seller.scss'
 
 export default function SellerPage() {
   const navigate = useNavigate();
@@ -14,8 +16,20 @@ export default function SellerPage() {
     updateSeller
   } = useSeller();
 
+  // 🔹 Inputs do formulário sincronizados com o seller
   const [storeName, setStoreName] = useState("");
   const [description, setDescription] = useState("");
+
+  // 🔹 Atualiza inputs sempre que o seller mudar (fetch inicial ou socket)
+useEffect(() => {
+  if (seller) {
+    // adiando a atualização para o próximo tick
+    setTimeout(() => {
+      setStoreName(seller.storeName || "");
+      setDescription(seller.description || "");
+    }, 0);
+  }
+}, [seller]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,9 +39,6 @@ export default function SellerPage() {
     } else {
       await updateSeller({ storeName, description });
     }
-
-
-    navigate("/dashboard");
   }
 
   if (loading) {
@@ -92,7 +103,7 @@ export default function SellerPage() {
                 value={storeName}
                 onChange={(e) => setStoreName(e.target.value)}
               />
-
+Q
               <textarea
                 placeholder="Nova descrição"
                 value={description}
@@ -101,12 +112,20 @@ export default function SellerPage() {
 
               <div className="button-group">
                 <button type="submit">Atualizar</button>
-                 <button className="meusProdutos" type="button" onClick={() => navigate("/products/me")}>
-      Meus Produtos
-    </button>
-                <button className="cadastrarProduto" type="button" onClick={() => navigate("/categories")}>
-      Cadastrar Produto
-    </button>
+                <button
+                  className="meusProdutos"
+                  type="button"
+                  onClick={() => navigate("/products/me")}
+                >
+                  Meus Produtos
+                </button>
+                <button
+                  className="cadastrarProduto"
+                  type="button"
+                  onClick={() => navigate("/categories")}
+                >
+                  Cadastrar Produto
+                </button>
               </div>
             </form>
           </div>

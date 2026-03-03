@@ -1,0 +1,98 @@
+
+.active-products {
+  padding: 40px;
+  background: #0c0f14;
+  min-height: 100vh;
+  color: #e6e9ef;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #2979ff; // azul discreto para produtos
+      border-radius: 50%;
+    }
+  }
+
+  p {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #151a22;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  }
+
+  thead {
+    background: #1b212b;
+
+    th {
+      text-align: left;
+      padding: 16px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8f9bb3;
+      font-weight: 600;
+    }
+  }
+
+  tbody {
+    tr {
+      border-top: 1px solid #232a36;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #1f2633;
+      }
+
+      td {
+        padding: 16px;
+        font-size: 14px;
+      }
+
+      td:nth-child(2) {
+        font-weight: 600;
+        color: #00e676; // verde para preço
+      }
+
+      td:nth-child(3) {
+        font-size: 13px;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .delete-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background: #2a303b;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #c62828;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}

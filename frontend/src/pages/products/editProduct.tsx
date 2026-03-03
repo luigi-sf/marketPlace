@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { productService } from "../../services/productServie";
+import { productService } from "../../services/productService";
 import type { Product } from "../../types/products/product";
-import '../../assets/styles/editProduct.scss'
+import '../../assets/styles/product/editProduct.scss'
 
 export default function EditProductPage() {
   const { id } = useParams<{ id: string }>();

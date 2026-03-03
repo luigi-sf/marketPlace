@@ -1,35 +1,39 @@
-import { useState } from "react"
-import { useAuth } from "../../components/hooks/useAuth"
-import { useNavigate, Link } from "react-router-dom"
-import "../../assets/styles/login.scss"
+import { useState } from "react";
+import { useAuth } from "../../components/hooks/useAuth";
+import { useNavigate, Link } from "react-router-dom";
+import "../../assets/styles/auth/login.scss";
 
 export default function LoginPage() {
-  const { login, loading } = useAuth()
-  const navigate = useNavigate()
+  const { login, loading } = useAuth();
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setError("")
+    e.preventDefault();
+    setError("");
 
     if (!email || !password) {
-      setError("Preencha todos os campos.")
-      return
+      setError("Preencha todos os campos.");
+      return;
     }
 
     try {
-      const success = await login({ email, password })
+      const user = await login({ email, password });
 
-      if (success) {
-        navigate("/dashboard")
-      } else {
-        setError("Email ou senha inválidos.")
+      if (!user) {
+        setError("Email ou senha inválidos.");
+        return;
       }
-    } catch {
-      setError("Erro inesperado. Tente novamente.")
+
+      // 🔥 Apenas navega
+      navigate("/dashboard");
+
+    } catch (error) {
+      console.error(error);
+      setError("Erro inesperado. Tente novamente.");
     }
   }
 
@@ -80,7 +84,8 @@ export default function LoginPage() {
             <Link to="/register"> Criar conta</Link>
           </div>
         </form>
+
       </div>
     </div>
-  )
+  );
 }

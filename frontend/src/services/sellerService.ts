@@ -1,21 +1,28 @@
 import api from "./api";
-import type { CreateSellerProfileDTO, SellerProfileResponse, UpdateSellerProfileDTO } from "../types/seller/seller";
-
+import type {
+  CreateSellerProfileDTO,
+  SellerProfileResponse,
+  UpdateSellerProfileDTO,
+} from "../types/seller/seller";
 
 export const sellerService = {
-    async create(data: CreateSellerProfileDTO): Promise<SellerProfileResponse> {
-        const response = await api.post('/sellers', data)
-        return response.data
-    },
+  async create(
+    data: CreateSellerProfileDTO
+  ): Promise<SellerProfileResponse> {
+    const response = await api.post("/sellers", data);
+    
+    return response.data.data; 
+  },
 
+  async update(
+    id: string,
+    data: UpdateSellerProfileDTO
+  ): Promise<SellerProfileResponse> {
+    const response = await api.put(`/sellers/${id}`, data);
+    return response.data.data;
+  },
 
-    async update(id: string, data: UpdateSellerProfileDTO): Promise<SellerProfileResponse> {
-        const response = await api.put(`/sellers/${id}`, data)
-        return response.data
-    },
-
-
-    async updateMyStore(
+ async updateMyStore(
         data: UpdateSellerProfileDTO
     ): Promise<SellerProfileResponse> {
         const { data: response } = await api.put<SellerProfileResponse>(
@@ -23,12 +30,10 @@ export const sellerService = {
             data
         );
 
-        return response;
-    },
+        return response;},
 
-    async getMyStore(): Promise<SellerProfileResponse> {
-        const response = await api.get("/sellers/me")
-        return response.data
-    }
-
-}
+  async getMyStore(): Promise<SellerProfileResponse> {
+    const response = await api.get("/sellers/me");
+    return response.data.data; // ajustado para data.data
+  },
+};

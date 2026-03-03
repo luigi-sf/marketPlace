@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { productService } from '../../services/productServie'
+import { productService } from '../../services/productService'
 import type { Product } from '../../types/products/product'
 import { useNavigate } from 'react-router-dom'
-import '../../assets/styles/myProduct.scss'
+import '../../assets/styles/product/myProduct.scss'
 
 export default function MyProductsPage() {
   const [products, setProducts] = useState<Product[]>([])

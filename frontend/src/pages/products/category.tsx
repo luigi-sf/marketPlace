@@ -3,26 +3,27 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import type { Category } from "../../types/products/category";
-import "../../assets/styles/category.scss";
+import "../../assets/styles/product/category.scss";
 
 export default function CategoryPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchCategories() {
-      try {
-        const { data } = await api.get("/categories");
-        setCategories(data);
-      } catch (error) {
-        console.error("Erro ao buscar categorias:", error);
-      } finally {
-        setLoading(false);
-      }
+ useEffect(() => {
+  async function fetchCategories() {
+    try {
+      const res = await api.get("/categories");
+      setCategories(res.data.data); // <-- pega o array correto
+    } catch (error) {
+      console.error("Erro ao buscar categorias:", error);
+    } finally {
+      setLoading(false);
     }
+  }
 
-    fetchCategories();
-  }, []);
+  fetchCategories();
+}, []);
+
 
   if (loading) return <p>Carregando...</p>;
 

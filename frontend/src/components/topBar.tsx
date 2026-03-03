@@ -20,7 +20,7 @@ export default function TopBar() {
 
   return (
     <div className="topbar">
-      <Link to="/dashboard" className="logo">
+      <Link to="/home" className="logo">
         OmniMarket
       </Link>
 
@@ -50,7 +50,7 @@ export default function TopBar() {
 
              {user.role === "ADMIN" && (
               <Link
-                to="/sellers/pending"
+                to="/admin"
                 className="topbar-button central-adm"
     
               >

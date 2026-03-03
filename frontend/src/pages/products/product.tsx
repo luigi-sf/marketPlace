@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import type { Category } from "../../types/products/category";
-import { productService } from "../../services/productServie";
-import "../../assets/styles/product.scss";
+import type { LocationState } from "../../types/products/product";
+import { productService } from "../../services/productService";
+import "../../assets/styles/product/product.scss";
 
-interface LocationState {
-  selectedCategory: Category;
-}
+
 
 export default function CreateProductPage() {
   const navigate = useNavigate();

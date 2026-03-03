@@ -28,3 +28,6 @@ export interface SignupDTO {
 export type AuthProviderProps = {
   children: ReactNode
 }
+export type PrivateRouteProps = {
+  children: ReactNode
+}
